@@ -1,4 +1,4 @@
-var tamano = 300;
+var tamano = 250;
 var video = document.getElementById("video");
 var canvas = document.getElementById("canvas");
 var otrocanvas = document.getElementById("otrocanvas");
