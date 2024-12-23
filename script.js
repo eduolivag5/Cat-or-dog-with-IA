@@ -18,6 +18,72 @@ window.onload = function () {
   mostrarCamara();
 };
 
+// Función para permitir que se suelte el archivo en el área de drop
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+// Función que maneja el archivo cuando se suelta en el área de drop
+function handleDrop(event) {
+  event.preventDefault();
+  
+  const file = event.dataTransfer.files[0]; // Obtiene el primer archivo
+  if (file) {
+    document.getElementById("file-name").textContent = `Archivo seleccionado: ${file.name}`;
+    processImage(file);
+  }
+}
+
+// Función para procesar la imagen cargada
+function processImage(file) {
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = new Image();
+    img.onload = function() {
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+      // Aquí puedes agregar el procesamiento de la imagen como el que tenías antes
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file); // Lee la imagen y la carga
+}
+
+
+// Función para borrar el canvas
+function borrarImagen() {
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Restablecer la clase de los resultados
+  document.getElementById("dog-result").classList.remove("bg-blue-500");
+  document.getElementById("cat-result").classList.remove("bg-pink-500");
+}
+
+
+// Evento para manejar la carga de imágenes desde archivo
+document.getElementById("file-input").addEventListener("change", function(event) {
+  var file = event.target.files[0];
+  if (file) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var img = new Image();
+      img.onload = function() {
+        // Dibujar la imagen cargada en el canvas
+        canvas.width = tamano;
+        canvas.height = tamano;
+        ctx.drawImage(img, 0, 0, tamano, tamano);
+        predecir(); // Realizar la predicción
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
 function mostrarCamara() {
   var opciones = {
     audio: false,
@@ -107,6 +173,8 @@ function predecir() {
     var tensor = tf.tensor4d(arr);
     var resultado = modelo.predict(tensor).dataSync();
 
+    console.log(resultado)
+
     var respuesta;
     if (resultado <= 0.5) {
       respuesta = "Gato";
@@ -194,6 +262,5 @@ function resample_single(canvas, width, height, resize_canvas) {
       data2[x2 + 3] = gx_a / weights_alpha;
     }
   }
-
   ctx2.putImageData(img2, 0, 0);
 }

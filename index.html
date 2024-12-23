@@ -10,15 +10,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body class="p-4 h-screen overflow-hidden bg-gradient-to-r from-blue-950 via-purple-950 to-pink-950 text-white">
+  <body class="p-4 overflow-x-hidden bg-gradient-to-r from-blue-950 via-purple-950 to-pink-950 text-white">
     
-    <main class="h-full flex flex-col items-center justify-center max-w-4xl mx-auto">
+    <main class="max-w-lg h-full flex flex-col items-center justify-center mx-auto">
       <h1 class="text-4xl font-bold text-center mb-4">
         ¿Es un <span class="text-yellow-300">perro</span> o un 
         <span class="text-yellow-300">gato</span>?
       </h1>
-
-      <p class="text-sm text-center text-gray-200">Activa tu cámara y enfoca el animal que te gustaría identificar.</p>
 
       <div class="flex items-center justify-center gap-2 rounded-lg p-6">
         <div
@@ -38,11 +36,26 @@
         </div>
       </div>
       
+      <!-- Zona para arrastrar y soltar una imagen -->
+      <input type="file" id="file-input" class="hidden" accept="image/*" />
+      <div
+        id="drop-area"
+        class="mt-5 p-6 border-2 border-dashed border-gray-500 w-full rounded-lg text-center cursor-pointer"
+        ondrop="handleDrop(event)" 
+        ondragover="allowDrop(event)"
+        onclick="document.getElementById('file-input').click();"
+      >
+        <p class="text-xs text-gray-200">Arrastra y suelta una imagen aquí o haz clic para seleccionar.</p>
+      </div>
+
 
       <div class="mt-5 flex flex-col items-center justify-center">
         <video id="video" playsinline autoplay style="width: 1px;"></video>
-        <button class="bg-zinc-800 fa-solid fa-rotate text-sm px-6 py-2 hover:bg-indigo-800 mb-2 transition-colors duration-500 rounded-full px-4 text-white" id="cambiar-camara" onclick="cambiarCamara();"></button>
-        <canvas id="canvas" class="max-w-full border-2 border-gray-500 rounded-lg"></canvas>
+        <div class="flex justify-end items-center gap-2 w-full mb-2">
+          <button class="bg-zinc-800 fa-solid fa-trash text-sm px-6 py-2 hover:bg-indigo-800 transition-colors duration-500 rounded-full px-4 text-white" onclick="borrarImagen();"></button>
+          <button class="bg-zinc-800 fa-solid fa-rotate text-sm px-6 py-2 hover:bg-indigo-800 transition-colors duration-500 rounded-full px-4 text-white" id="cambiar-camara" onclick="cambiarCamara();"></button>  
+        </div>
+        <canvas id="canvas" class="max-w-full max-h-64 object-cover border-2 border-gray-500 rounded-lg"></canvas>
         <canvas id="otrocanvas" width="150" height="150" class="hidden"></canvas>            
       </div>
 
