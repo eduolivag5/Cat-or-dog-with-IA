@@ -109,9 +109,11 @@ function predecir() {
     var respuesta;
     if (resultado <= 0.5) {
       respuesta = "Gato";
+      document.getElementById("cat-result").classList.remove("bg-zinc-800");
       document.getElementById("cat-result").classList.add("bg-pink-500");
     } else {
       respuesta = "Perro";
+      document.getElementById("cat-result").classList.remove("bg-zinc-800");
       document.getElementById("dog-result").classList.add("bg-blue-500");
     }
     document.getElementById("resultado").innerHTML = respuesta;
