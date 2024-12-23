@@ -4,7 +4,7 @@ var canvas = document.getElementById("canvas");
 var otrocanvas = document.getElementById("otrocanvas");
 var ctx = canvas.getContext("2d");
 var currentStream = null;
-var facingMode = "user";
+var facingMode = "environment"; // Usa la cámara trasera por defecto
 
 var modelo = null;
 
@@ -22,6 +22,7 @@ function mostrarCamara() {
   var opciones = {
     audio: false,
     video: {
+      facingMode: facingMode, // Configura la cámara trasera por defecto
       width: tamano,
       height: tamano,
     },
@@ -49,7 +50,7 @@ function cambiarCamara() {
     });
   }
 
-  facingMode = facingMode == "user" ? "environment" : "user";
+  facingMode = facingMode === "user" ? "environment" : "user"; // Alterna entre frontal y trasera
 
   var opciones = {
     audio: false,
@@ -109,11 +110,9 @@ function predecir() {
     var respuesta;
     if (resultado <= 0.5) {
       respuesta = "Gato";
-      document.getElementById("cat-result").classList.remove("bg-zinc-800");
       document.getElementById("cat-result").classList.add("bg-pink-500");
     } else {
       respuesta = "Perro";
-      document.getElementById("cat-result").classList.remove("bg-zinc-800");
       document.getElementById("dog-result").classList.add("bg-blue-500");
     }
     document.getElementById("resultado").innerHTML = respuesta;

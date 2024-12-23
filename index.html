@@ -22,7 +22,7 @@
       <div class="flex items-center justify-center gap-2 rounded-lg p-6">
         <div
           id="dog-result"
-          class="flex gap-2 items-center justify-center bg-zinc-800 p-4 w-28 md:w-36 rounded-full border-2 border-gray-500 text-white transition-colors duration-500"
+          class="flex gap-2 items-center justify-center bg-zinc-800 p-4 w-32 md:w-40 rounded-full border-2 border-gray-500 text-white transition-colors duration-500"
         >
           <i class="fa-solid fa-dog text-[clamp(1.5rem, 5vw, 3.75rem)]"></i>
           <span class="font-bold text-[clamp(1rem, 4vw, 2rem)]">PERRO</span>
@@ -32,7 +32,7 @@
       
         <div
           id="cat-result"
-          class="flex gap-2 items-center justify-center bg-zinc-800 p-4 w-28 md:w-36 rounded-full border-2 border-gray-500 text-white transition-colors duration-500"
+          class="flex gap-2 items-center justify-center bg-zinc-800 p-4 w-32 md:w-40 rounded-full border-2 border-gray-500 text-white transition-colors duration-500"
         >
           <span class="font-bold text-[clamp(1rem, 4vw, 2rem)]">GATO</span>
           <i class="fa-solid fa-cat text-[clamp(1.5rem, 5vw, 3.75rem)]"></i>
@@ -44,7 +44,7 @@
         <video id="video" playsinline autoplay style="width: 1px;"></video>
         <button class="bg-zinc-800 fa-solid fa-rotate text-sm px-6 py-2 hover:bg-indigo-800 mb-2 transition-colors duration-500 rounded-full px-4 text-white" id="cambiar-camara" onclick="cambiarCamara();">
         </button>
-        <canvas id="canvas" class="max-w-full border-2 border-gray-500 rounded-lg"></canvas>
+        <canvas id="canvas" width="300" height="300" class="max-w-full border-2 border-gray-500 rounded-lg"></canvas>
         <canvas id="otrocanvas" width="150" height="150" class="hidden"></canvas>            
       </div>
 
